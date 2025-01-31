@@ -16,20 +16,46 @@ home_page = """
 <head>
     <title>Product Gallery</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Product Gallery</h1>
-        {% if 'logged_in' in session %}
-            <a class="btn btn-primary mb-3" href="/add">Add New Product</a>
-            <a class="btn btn-secondary mb-3" href="/logout">Logout</a>
-        {% else %}
-            <a class="btn btn-secondary mb-3" href="/login">Admin Login</a>
-        {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Product Gallery</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if 'logged_in' in session %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">Add New Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Admin Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
         <div class="row">
             {% for product in products %}
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card mb-4 shadow-sm">
                     <img src="{{ product.image }}" class="card-img-top" alt="Product Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
@@ -59,8 +85,8 @@ login_page = """
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Admin Login</h1>
-        <form action="/login" method="POST">
+        <h1 class="text-center">Admin Login</h1>
+        <form action="/login" method="POST" class="mt-4">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" name="username" required>
@@ -69,7 +95,7 @@ login_page = """
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
     </div>
 </body>
@@ -85,8 +111,8 @@ add_product_page = """
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Add New Product</h1>
-        <form action="/add" method="POST" enctype="multipart/form-data">
+        <h1 class="text-center">Add New Product</h1>
+        <form action="/add" method="POST" enctype="multipart/form-data" class="mt-4">
             <div class="form-group">
                 <label for="name">Product Name:</label>
                 <input type="text" class="form-control" name="name" required>
@@ -103,9 +129,9 @@ add_product_page = """
                 <label for="image">Image:</label>
                 <input type="file" class="form-control" name="image" required>
             </div>
-            <button type="submit" class="btn btn-success">Add Product</button>
+            <button type="submit" class="btn btn-success btn-block">Add Product</button>
         </form>
-        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+        <a href="/" class="btn btn-secondary btn-block mt-3">Back to Home</a>
     </div>
 </body>
 </html>
