@@ -22,6 +22,9 @@ home_page = """
         <h1 class="text-center">Product Gallery</h1>
         {% if 'logged_in' in session %}
             <a class="btn btn-primary mb-3" href="/add">Add New Product</a>
+            <a class="btn btn-secondary mb-3" href="/logout">Logout</a>
+        {% else %}
+            <a class="btn btn-secondary mb-3" href="/login">Admin Login</a>
         {% endif %}
         <div class="row">
             {% for product in products %}
@@ -42,9 +45,6 @@ home_page = """
             </div>
             {% endfor %}
         </div>
-        {% if 'logged_in' not in session %}
-            <a class="btn btn-secondary" href="/login">Admin Login</a>
-        {% endif %}
     </div>
 </body>
 </html>
